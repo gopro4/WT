@@ -34,6 +34,41 @@ print(y_test)
 model = LinearRegression()
 model.fit(X_train, y_train)
 
+
+
+Q.S 1) Write a PHP script to keep track of number of times the web page has been accessed (Use Session Tracking). 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Visits Counter</title>
+</head>
+<body>
+    <h1>Welcome to My Page</h1>
+
+    <?php
+    session_start();
+
+    // Check if the session variable for page visits is set
+    if (!isset($_SESSION['page_visits'])) {
+        // If not set, initialize it to 1
+        $_SESSION['page_visits'] = 1;
+    } else {
+        // If set, increment the page visits counter
+        $_SESSION['page_visits']++;
+    }
+
+    // Display the number of page visits
+    echo "<p>Number of times this page has been visited: " . $_SESSION['page_visits'] . "</p>";
+    ?>
+
+    <!-- Your HTML content here -->
+</body>
+</html>
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
