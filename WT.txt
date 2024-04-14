@@ -1,0 +1,418 @@
+1,   5,   6,   7,   9,   17,   19,   20,   21,   30
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.S1.2)Create ‘Position_Salaries’ Data set. Build a linear regression model by identifying independent and target variable. Split the variables into training and testing sets. then divide the training and testing sets into a 7:3 ratio, respectively and print them. Build a simple linear regression model. 
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Create the 'Position_Salaries' dataset
+data = {'Position': ['Junior', 'Senior', 'Manager', 'Director', 'VP'],
+        'Level': [1, 2, 3, 4, 5],
+        'Salary': [45000, 60000, 80000, 120000, 180000]}
+df = pd.DataFrame(data)
+
+# Identify independent (X) and target (y) variables
+X = df[['Level']]  # Independent variable
+y = df['Salary']   # Target variable
+# Split the data into training and testing sets (7:3 ratio)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Print the training and testing sets
+print("Training Set:")
+print(X_train)
+print(y_train)
+print("\nTesting Set:")
+print(X_test)
+print(y_test)
+
+# Build a simple linear regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.S5.1) Create XML file named “Item.xml”with item-name, item-rate, item quantity Store the details of 5 Items of different Types
+
+<Items>
+    <Item>
+        <Name>Laptop</Name>
+        <Rate>1500</Rate>
+        <Quantity>10</Quantity>
+    </Item>
+    <Item>
+        <Name>Smartphone</Name>
+        <Rate>800</Rate>
+        <Quantity>20</Quantity>
+    </Item>
+    <Item>
+        <Name>Headphones</Name>
+        <Rate>50</Rate>
+        <Quantity>30</Quantity>
+    </Item>
+    <Item>
+        <Name>Books</Name>
+        <Rate>20</Rate>
+        <Quantity>50</Quantity>
+    </Item>
+    <Item>
+        <Name>Watch</Name>
+        <Rate>200</Rate>
+        <Quantity>15</Quantity>
+    </Item>
+</Items>
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.S.6 1) Write PHP script to read “book.xml” file into simpleXML object. Display attributes and elements . ( simple_xml_load_file() function ) 
+
+<?php
+// Load the XML file into a SimpleXML object
+$xml = simplexml_load_file('book.xml');
+
+// Display attributes and elements
+echo "Book Details:\n";
+foreach ($xml->book as $book) {
+    echo "Title: " . $book->title . "\n";
+    echo "Author: " . $book->author . "\n";
+    echo "Year: " . $book->attributes()->year . "\n";
+    echo "Price: $" . $book->price . "\n\n";
+}
+?>
+
+//xml
+<books>
+    <book year="2022">
+        <title>Book Title 1</title>
+        <author>Author Name 1</author>
+        <price>25.99</price>
+    </book>
+    <book year="2020">
+        <title>Book Title 2</title>
+        <author>Author Name 2</author>
+        <price>19.99</price>
+    </book>
+    <!-- More book elements -->
+</books>
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.S7. 1) Write a PHP script to read “Movie.xml” file and print all MovieTitle and ActorName of file using DOMDocument Parser. “Movie.xml” file should contain following information with at least 5 records with values. MovieInfoMovieNo, MovieTitle, ActorName ,ReleaseYear 
+
+<?php
+// Load the XML file using DOMDocument
+$doc = new DOMDocument();
+$doc->load('Movie.xml');
+
+// Get all elements with tag name 'MovieInfo'
+$movieInfos = $doc->getElementsByTagName('MovieInfo');
+
+echo "Movie Details:\n";
+foreach ($movieInfos as $movieInfo) {
+    // Get elements within each 'MovieInfo' element
+    $movieNo = $movieInfo->getElementsByTagName('MovieNo')->item(0)->nodeValue;
+    $movieTitle = $movieInfo->getElementsByTagName('MovieTitle')->item(0)->nodeValue;
+    $actorName = $movieInfo->getElementsByTagName('ActorName')->item(0)->nodeValue;
+    $releaseYear = $movieInfo->getElementsByTagName('ReleaseYear')->item(0)->nodeValue;
+
+    echo "Movie Title: $movieTitle\n";
+    echo "Actor Name: $actorName\n";
+    echo "--------------\n";
+}
+?>
+
+
+<Movies>
+    <MovieInfo>
+        <MovieNo>1</MovieNo>
+        <MovieTitle>Movie Title 1</MovieTitle>
+        <ActorName>Actor Name 1</ActorName>
+        <ReleaseYear>2022</ReleaseYear>
+    </MovieInfo>
+    <MovieInfo>
+        <MovieNo>2</MovieNo>
+        <MovieTitle>Movie Title 2</MovieTitle>
+        <ActorName>Actor Name 2</ActorName>
+        <ReleaseYear>2021</ReleaseYear>
+    </MovieInfo>
+    <!-- More MovieInfo elements -->
+</Movies>
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.S.9 1) Write a JavaScript function to validate username and password for a membership form.
+
+function validateForm() {
+    // Get the username and password input values
+    var username = document.getElementById('username').value.trim();
+    var password = document.getElementById('password').value.trim();
+
+    // Regular expressions for validation
+    var usernameRegex = /^[a-zA-Z0-9_-]{3,16}$/; // Alphanumeric, underscores, and hyphens, 3-16 characters
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()-_=+]{8,}$/; // At least one lowercase, one uppercase, one digit, and 8+ characters
+
+    // Check if username and password meet the criteria
+    if (!usernameRegex.test(username)) {
+        alert('Username should be alphanumeric, underscores, or hyphens, 3-16 characters long.');
+        return false; // Prevent form submission
+    }
+
+    if (!passwordRegex.test(password)) {
+        alert('Password should have at least one lowercase, one uppercase, one digit, and 8+ characters.');
+        return false; // Prevent form submission
+    }
+
+    // Form validation passed
+    return true; // Allow form submission
+}
+//HTML
+<form onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+
+    <input type="submit" value="Submit">
+</form>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.S.17 1) Write a Java Script Program to show Hello Good Morning message onload event using alert box and display the Student registration from. 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+</head>
+<body onload="displayMessage()">
+
+<script>
+function displayMessage() {
+    alert('Hello! Good Morning');
+}
+</script>
+
+<h1>Student Registration Form</h1>
+<form>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName"><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName"><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber"><br>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob"><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.S.19 1) Write a Java Script Program to validate user name and password on onSubmit event.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <script>
+        function validateForm() {
+            // Get the username and password input values
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            // Regular expressions for validation
+            var usernameRegex = /^[a-zA-Z0-9_-]{3,16}$/; // Alphanumeric, underscores, and hyphens, 3-16 characters
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()-_=+]{8,}$/; // At least one lowercase, one uppercase, one digit, and 8+ characters
+
+            // Check if username and password meet the criteria
+            if (!usernameRegex.test(username)) {
+                alert('Username should be alphanumeric, underscores, or hyphens, 3-16 characters long.');
+                return false; // Prevent form submission
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('Password should have at least one lowercase, one uppercase, one digit, and 8+ characters.');
+                return false; // Prevent form submission
+            }
+
+            // Form validation passed
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+<body>
+
+<h1>User Login</h1>
+<form onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q.S20 1) create a student.xml file containing at least 5 student information 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <id>1</id>
+        <name>John Doe</name>
+        <age>20</age>
+        <grade>A</grade>
+        <city>New York</city>
+    </student>
+    <student>
+        <id>2</id>
+        <name>Alice Smith</name>
+        <age>22</age>
+        <grade>B</grade>
+        <city>Los Angeles</city>
+    </student>
+    <student>
+        <id>3</id>
+        <name>Michael Johnson</name>
+        <age>21</age>
+        <grade>C</grade>
+        <city>Chicago</city>
+    </student>
+    <student>
+        <id>4</id>
+        <name>Emily Brown</name>
+        <age>19</age>
+        <grade>A</grade>
+        <city>Houston</city>
+    </student>
+    <student>
+        <id>5</id>
+        <name>David Wilson</name>
+        <age>20</age>
+        <grade>B</grade>
+        <city>Miami</city>
+    </student>
+</students>
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+QS.21. 1)Add a JavaScript File in Codeigniter. The Javascript code should check whether a number is positive or negative
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Checker</title>
+    <script src="<?php echo base_url('path/to/numberChecker.js'); ?>"></script>
+</head>
+<body>
+    <!-- Other HTML content -->
+    <script>
+        // JavaScript code to call the checkNumber function
+        var result = checkNumber(5);
+        console.log(result); // Output: "Positive"
+    </script>
+</body>
+</html>
+
+//js code numberChecker.js
+function checkNumber(number) {
+    // Check if the number is greater than zero
+    if (number > 0) {
+        return "Positive";
+    }
+    // Check if the number is less than zero
+    else if (number < 0) {
+        return "Negative";
+    }
+    // If the number is neither positive nor negative, it must be zero
+    else {
+        return "Zero";
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Q.S30 1) Create a XML file which gives details of books available in “Bookstore” from following categories. 1) Yoga 2) Story 3) Technical and elements in each category are in the following format -------------- --------------- -------------- Save the file as “Bookcategory.xml” 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Bookstore>
+    <Yoga>
+        <Book>
+            <Book_Title>Yoga for Beginners</Book_Title>
+            <Book_Author>John Smith</Book_Author>
+            <Book_Price>$15.99</Book_Price>
+        </Book>
+        <Book>
+            <Book_Title>Yoga Anatomy</Book_Title>
+            <Book_Author>Leslie Kaminoff</Book_Author>
+            <Book_Price>$20.50</Book_Price>
+        </Book>
+    </Yoga>
+    <Story>
+        <Book>
+            <Book_Title>The Alchemist</Book_Title>
+            <Book_Author>Paulo Coelho</Book_Author>
+            <Book_Price>$12.99</Book_Price>
+        </Book>
+        <Book>jsj
+            <Book_Title>Harry Potter and the Sorcerer's Stone</Book_Title>
+            <Book_Author>J.K. Rowling</Book_Author>
+            <Book_Price>$18.99</Book_Price>
+        </Book>
+    </Story>
+    <Technical>
+        <Book>
+            <Book_Title>Introduction to Algorithms</Book_Title>
+            <Book_Author>Thomas H. Cormen</Book_Author>
+            <Book_Price>$40.00</Book_Price>
+        </Book>
+        <Book>
+            <Book_Title>Clean Code: A Handbook of Agile Software Craftsmanship</Book_Title>
+            <Book_Author>Robert C. Martin</Book_Author>
+            <Book_Price>$35.00</Book_Price>
+        </Book>
+    </Technical>
+</Bookstore>
+
+
