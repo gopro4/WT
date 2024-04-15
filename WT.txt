@@ -143,45 +143,53 @@ foreach ($xml->book as $book) {
 
 Q.S7. 1) Write a PHP script to read “Movie.xml” file and print all MovieTitle and ActorName of file using DOMDocument Parser. “Movie.xml” file should contain following information with at least 5 records with values. MovieInfoMovieNo, MovieTitle, ActorName ,ReleaseYear 
 
+<?xml version="1.0"?>
+<movieinfo>
+    <movie no="101">
+        <title>Sooryavanshi</title>
+        <actor>akshay kumar</actor>
+        <ryear>2021</ryear>
+    </movie>
+    <movie no="102">
+        <title>Simba</title>
+        <actor>Ranbir Singh</actor>
+        <ryear>2020</ryear>
+    </movie>
+    <movie no="103">
+        <title>Bahubali</title>
+        <actor>Prabhas</actor>
+        <ryear>2018</ryear>
+    </movie>
+    <movie no="104">
+        <title>Radhe</title>
+        <actor>Salman Khan</actor>
+        <ryear>2020</ryear>
+    </movie>
+</movieinfo>
+
+PHP CODE
 <?php
-// Load the XML file using DOMDocument
-$doc = new DOMDocument();
-$doc->load('Movie.xml');
+    $dom=new DomDocument();
+    $dom->load("movie.xml");
 
-// Get all elements with tag name 'MovieInfo'
-$movieInfos = $doc->getElementsByTagName('MovieInfo');
+    echo "<b>movies title</b><br>";
 
-echo "Movie Details:\n";
-foreach ($movieInfos as $movieInfo) {
-    // Get elements within each 'MovieInfo' element
-    $movieNo = $movieInfo->getElementsByTagName('MovieNo')->item(0)->nodeValue;
-    $movieTitle = $movieInfo->getElementsByTagName('MovieTitle')->item(0)->nodeValue;
-    $actorName = $movieInfo->getElementsByTagName('ActorName')->item(0)->nodeValue;
-    $releaseYear = $movieInfo->getElementsByTagName('ReleaseYear')->item(0)->nodeValue;
+    $t=$dom->getElementsByTagName("title");
+    foreach($t as $node)
+    {
+        print $node->textContent;
+        echo "<br>";
+    }
 
-    echo "Movie Title: $movieTitle\n";
-    echo "Actor Name: $actorName\n";
-    echo "--------------\n";
-}
+    echo "<b>actor name</b><br>";
+    $t1=$dom->getElementsByTagName("actor");
+    
+    foreach($t1 as $node)
+    {
+        print $node->textContent;
+        echo "<br>";
+    }
 ?>
-
-
-<Movies>
-    <MovieInfo>
-        <MovieNo>1</MovieNo>
-        <MovieTitle>Movie Title 1</MovieTitle>
-        <ActorName>Actor Name 1</ActorName>
-        <ReleaseYear>2022</ReleaseYear>
-    </MovieInfo>
-    <MovieInfo>
-        <MovieNo>2</MovieNo>
-        <MovieTitle>Movie Title 2</MovieTitle>
-        <ActorName>Actor Name 2</ActorName>
-        <ReleaseYear>2021</ReleaseYear>
-    </MovieInfo>
-    <!-- More MovieInfo elements -->
-</Movies>
-
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
